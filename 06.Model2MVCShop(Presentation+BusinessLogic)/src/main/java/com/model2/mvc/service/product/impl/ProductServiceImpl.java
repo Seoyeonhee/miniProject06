@@ -41,8 +41,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	public Map<String, Object> getProductList(Search search, String role) throws Exception {
+		System.out.println("ProductServiceImpl¿« getProductList ¡¯¿‘");
 		List<Product> list= productDao.getProductList(search, role);
+		System.out.println("ProductServiceImpl : list => " + list);
 		int totalCount = productDao.getTotalCount(search);
+		System.out.println("ProductServiceImpl : totalCount => " + totalCount);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list );

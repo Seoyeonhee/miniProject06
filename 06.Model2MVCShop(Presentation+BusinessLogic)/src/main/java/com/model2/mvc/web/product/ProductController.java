@@ -102,10 +102,10 @@ public class ProductController {
 		search.setPageSize(pageSize);
 		
 		String role = ((User)session.getAttribute("user")).getRole();
-		
+
 		// Business logic ¼öÇà
 		Map<String , Object> map=productService.getProductList(search, role);
-		
+		System.out.println("¼­¿¬Èñ_productList" + map);
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		
@@ -122,7 +122,8 @@ public class ProductController {
 		for(int i=0 ; i<list.size() ; i++) {
 			prodNo = list.get(i).getProdNo();
 			purchase = purchaseService.getPurchase2(prodNo);
-			
+			purchase.setPurchaseProd(list.get(i));
+			System.out.println("¼­¿¬Èñ_purchase" + purchase);
 			if(purchase!=null && !purchase.getPurchaseProd().getProTranCode().equals("0")) {
 				list.set(i, purchase.getPurchaseProd());
 			} else {
